@@ -130,6 +130,7 @@
             background-color: var(--muted) !important;
             color: var(--foreground) !important;
             border-color: var(--input) !important;
+            caret-color: var(--foreground) !important;
         }
 
         input:focus, textarea:focus, select:focus {
@@ -204,6 +205,46 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent);
+        }
+
+        /* Text selection highlight - light grey for visibility */
+        ::selection {
+            background-color: #cccccc !important;
+            color: var(--background) !important;
+        }
+
+        input::selection,
+        textarea::selection {
+            background-color: #cccccc !important;
+            color: var(--background) !important;
+        }
+
+        /* Monaco Editor specific fixes for selection and cursor */
+        /* Override Monaco's default selection background using VSCode variables */
+        :root {
+            --vscode-editor-selectionBackground: #cccccc !important;
+            --vscode-editor-inactiveSelectionBackground: #cccccc !important;
+            --vscode-editor-selectionHighlightBackground: #cccccc !important;
+        }
+
+        /* Force visible cursor */
+        .monaco-editor .cursor {
+            border-left: 2px solid var(--foreground) !important;
+            background-color: transparent !important;
+        }
+
+        /* Override any existing selection drawing */
+        .monaco-editor .view-overlays {
+            background: transparent !important;
+        }
+
+        /* ProseMirror editor (if used for rich text) */
+        .ProseMirror-focused * {
+            caret-color: var(--foreground) !important;
+        }
+
+        .ProseMirror-hideselection * {
+            caret-color: var(--foreground) !important; /* Override if hidden */
         }
     `;
 
